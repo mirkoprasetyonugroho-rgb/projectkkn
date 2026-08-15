@@ -102,7 +102,7 @@ export default function Home() {
           </div>
 
           <div className="hidden items-center gap-6 lg:flex">
-            {['Beranda', 'Profil', 'Pemerintahan', 'Layanan', 'Berita', 'Galeri', 'Potensi Desa', 'Kontak'].map((item) => (
+            {['Beranda', 'Profil', 'Pemerintahan', 'Layanan', 'Berita', 'Galeri', 'Video', 'Potensi Desa', 'Kontak'].map((item) => (
               <a key={item} href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-sm font-medium text-slate-700 transition hover:text-green-600">
                 {item}
               </a>
@@ -117,7 +117,7 @@ export default function Home() {
         {menuOpen && (
           <div className="mx-auto mt-3 max-w-7xl rounded-2xl border border-white/60 bg-white/95 p-4 shadow-xl backdrop-blur-lg lg:hidden">
             <div className="flex flex-col gap-3">
-              {['Beranda', 'Profil', 'Pemerintahan', 'Layanan', 'Berita', 'Galeri', 'Potensi Desa', 'Kontak'].map((item) => (
+              {['Beranda', 'Profil', 'Pemerintahan', 'Layanan', 'Berita', 'Galeri', 'Video', 'Potensi Desa', 'Kontak'].map((item) => (
                 <a key={item} href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100" onClick={() => setMenuOpen(false)}>
                   {item}
                 </a>
@@ -311,6 +311,37 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      {/* Video Preview Desa */}
+      <section id="video" className="mx-auto max-w-7xl px-4 py-20 md:px-8">
+        <div className="mb-10 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-xs font-bold text-green-700 mb-3 shadow-xs">
+            <Sparkles className="h-3.5 w-3.5" /> Video Profil Kelurahan
+          </div>
+          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">Jelajahi Kelurahan Kriwen Lewat Video Preview</h2>
+          <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+            Saksikan keindahan wilayah, infrastruktur publik, kegiatan kemasyarakatan, serta potensi unggulan Kelurahan Kriwen dalam tampilan video dokumenter resmi.
+          </p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] border border-slate-200/80 bg-slate-950 shadow-[0_30px_100px_-20px_rgba(15,23,42,0.4)] p-2 sm:p-4"
+        >
+          <div className="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-slate-900 shadow-2xl">
+            <iframe
+              className="h-full w-full rounded-[2rem]"
+              src="https://www.youtube-nocookie.com/embed/o_1aF54DO60?autoplay=1&mute=1&controls=0&loop=1&playlist=o_1aF54DO60&rel=0&modestbranding=1"
+              title="Video Preview Profil Kelurahan Kriwen"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </motion.div>
       </section>
 
       {/* Call to Action */}
