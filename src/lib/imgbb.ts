@@ -1,5 +1,10 @@
 export const uploadImageToImgBB = async (file: File): Promise<string> => {
-  const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || 'a2ddbca1fb5ef4f2cc5d2211cad107b2';
+  const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
+
+  if (!apiKey) {
+    throw new Error('NEXT_PUBLIC_IMGBB_API_KEY belum dikonfigurasi di file .env');
+  }
+
   const formData = new FormData();
   formData.append('image', file);
 
