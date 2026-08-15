@@ -101,12 +101,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex">
             {['Beranda', 'Profil', 'Pemerintahan', 'Layanan', 'Berita', 'Galeri', 'Video', 'Potensi Desa', 'Kontak'].map((item) => (
               <a key={item} href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-sm font-medium text-slate-700 transition hover:text-green-600">
                 {item}
               </a>
             ))}
+            <a
+              href="/admin/login"
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-green-600 to-blue-600 px-4.5 py-2 text-xs font-bold text-white shadow-md transition hover:scale-105 hover:shadow-lg ml-2"
+            >
+              <ShieldCheck className="h-4 w-4 text-green-200" /> Dashboard Admin
+            </a>
           </div>
 
           <button onClick={() => setMenuOpen(!menuOpen)} className="rounded-full border border-white/70 bg-white/70 p-2 text-slate-700 lg:hidden">
@@ -344,21 +350,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Call to Action */}
-      <section className="mx-auto max-w-7xl px-4 py-20 md:px-8 lg:hidden">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-[2.5rem] bg-gradient-to-r from-green-600 to-blue-600 p-8 text-white shadow-[0_30px_100px_-30px_rgba(15,23,42,0.35)] lg:p-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-green-100">Layanan Aspirasi & Pengaduan</p>
-              <h2 className="mt-3 text-3xl font-bold sm:text-4xl">Sampaikan Keluhan & Aspirasi Anda Langsung ke Pengelola Kelurahan.</h2>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <button onClick={() => setComplaintFormOpen(true)} className="rounded-full bg-white px-6 py-3 font-semibold text-slate-900 transition hover:scale-105 shadow-xl">Tulis Pengaduan Warga</button>
-              <a href="/admin/login" className="rounded-full border border-white/40 bg-white/10 px-6 py-3 font-semibold text-white transition hover:scale-105">Login Admin Panel</a>
-            </div>
-          </div>
-        </motion.div>
-      </section>
 
       {/* Kontak */}
       <section id="kontak" className="mx-auto max-w-7xl px-4 py-20 md:px-8">
