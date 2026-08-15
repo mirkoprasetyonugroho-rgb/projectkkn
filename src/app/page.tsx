@@ -451,14 +451,6 @@ export default function Home() {
               <li>Download Formulir</li>
             </ul>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">Akses Pengelola</h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-600">
-              <li><a href="/admin/login" className="font-semibold text-green-700 hover:underline">Portal Login Admin</a></li>
-              <li>{profile.email}</li>
-              <li>{profile.phone}</li>
-            </ul>
-          </div>
         </div>
         <div className="mx-auto mt-8 max-w-7xl border-t border-slate-200 pt-6 text-center text-sm text-slate-500">© 2026 Kelurahan Kriwen. Semua hak cipta dilindungi.</div>
       </footer>
