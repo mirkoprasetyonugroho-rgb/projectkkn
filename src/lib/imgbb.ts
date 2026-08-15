@@ -1,5 +1,5 @@
 export const uploadImageToImgBB = async (file: File): Promise<string> => {
-  const apiKey = 'a2ddbca1fb5ef4f2cc5d2211cad107b2';
+  const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || 'a2ddbca1fb5ef4f2cc5d2211cad107b2';
   const formData = new FormData();
   formData.append('image', file);
 

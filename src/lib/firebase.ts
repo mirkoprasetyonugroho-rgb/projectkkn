@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBuIJ2OKGU6HjGbwizIr4tK1uNen0CAOnU",
-  authDomain: "kriwenweb.firebaseapp.com",
-  projectId: "kriwenweb",
-  storageBucket: "kriwenweb.firebasestorage.app",
-  messagingSenderId: "303760643417",
-  appId: "1:303760643417:web:3271e2fcccd8a7ce452848",
-  measurementId: "G-M9E3EEE78Q"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyBuIJ2OKGU6HjGbwizIr4tK1uNen0CAOnU",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "kriwenweb.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "kriwenweb",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "kriwenweb.firebasestorage.app",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "303760643417",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:303760643417:web:3271e2fcccd8a7ce452848",
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-M9E3EEE78Q"
 };
 
 // Initialize Firebase App
