@@ -28,10 +28,10 @@ import {
   Send,
   Sprout,
   Trash2,
-  Trees,
   UserRound,
   X,
 } from 'lucide-react';
+import { ImageUploadInput } from '@/components/ImageUploadInput';
 
 export default function AdminDashboardPage() {
   const {
@@ -682,6 +682,19 @@ export default function AdminDashboardPage() {
               />
             </div>
 
+            <div className="grid gap-4 sm:grid-cols-2">
+              <ImageUploadInput
+                label="Foto Kepala Kelurahan"
+                value={profileForm.headImage}
+                onChange={(url) => setProfileForm({ ...profileForm, headImage: url })}
+              />
+              <ImageUploadInput
+                label="Foto / Peta Wilayah Kantor"
+                value={profileForm.mapImage}
+                onChange={(url) => setProfileForm({ ...profileForm, mapImage: url })}
+              />
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
                 <label className="block font-semibold text-slate-600 mb-1">Alamat Kantor</label>
@@ -748,10 +761,11 @@ export default function AdminDashboardPage() {
                   <input type="text" required value={newsForm.author} onChange={(e) => setNewsForm({ ...newsForm, author: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
                 </div>
               </div>
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">URL Gambar</label>
-                <input type="text" required value={newsForm.image} onChange={(e) => setNewsForm({ ...newsForm, image: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
-              </div>
+              <ImageUploadInput
+                label="Foto Sampul Berita"
+                value={newsForm.image}
+                onChange={(url) => setNewsForm({ ...newsForm, image: url })}
+              />
               <div>
                 <label className="block font-semibold text-slate-700 mb-1">Ringkasan Berita</label>
                 <textarea rows={3} required value={newsForm.excerpt} onChange={(e) => setNewsForm({ ...newsForm, excerpt: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
@@ -786,10 +800,11 @@ export default function AdminDashboardPage() {
                 <label className="block font-semibold text-slate-700 mb-1">Tag / Kategori</label>
                 <input type="text" required value={potentialForm.tag} onChange={(e) => setPotentialForm({ ...potentialForm, tag: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
               </div>
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">URL Foto</label>
-                <input type="text" required value={potentialForm.image} onChange={(e) => setPotentialForm({ ...potentialForm, image: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
-              </div>
+              <ImageUploadInput
+                label="Foto Sektor Potensi / UMKM"
+                value={potentialForm.image}
+                onChange={(url) => setPotentialForm({ ...potentialForm, image: url })}
+              />
               <div>
                 <label className="block font-semibold text-slate-700 mb-1">Deskripsi</label>
                 <textarea rows={3} required value={potentialForm.desc} onChange={(e) => setPotentialForm({ ...potentialForm, desc: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
@@ -828,10 +843,11 @@ export default function AdminDashboardPage() {
                   <option value="Transparansi">Transparansi</option>
                 </select>
               </div>
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">URL Gambar</label>
-                <input type="text" required value={galleryForm.image} onChange={(e) => setGalleryForm({ ...galleryForm, image: e.target.value })} className="w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-slate-800 outline-none focus:border-green-600 focus:bg-white" />
-              </div>
+              <ImageUploadInput
+                label="Foto Galeri Momen"
+                value={galleryForm.image}
+                onChange={(url) => setGalleryForm({ ...galleryForm, image: url })}
+              />
               <div className="flex justify-end gap-2 pt-2">
                 <button type="button" onClick={() => setGalleryModal(false)} className="rounded-xl border border-slate-200 px-4 py-2 font-semibold text-slate-600">Batal</button>
                 <button type="submit" className="rounded-xl bg-green-600 px-4 py-2 font-bold text-white hover:bg-green-700">Simpan Foto</button>

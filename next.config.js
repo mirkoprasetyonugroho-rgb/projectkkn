@@ -15,6 +15,18 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'lookaside.fbsbx.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ibb.co',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
 };

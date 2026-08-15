@@ -15,29 +15,35 @@ export default function AdminLoginPage() {
   const { login } = useData();
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    setTimeout(() => {
-      if (username.trim() === 'admin' && login(password)) {
+    try {
+      const success = await login(username, password);
+      if (success) {
         router.push('/admin');
       } else {
-        setError('Username atau Password salah! (Default: admin / admin123)');
+        setError('Username/Email atau Password salah!');
         setLoading(false);
       }
-    }, 400);
+    } catch (err) {
+      setError('Gagal terhubung ke Firebase Auth');
+      setLoading(false);
+    }
   };
 
-  const handleQuickLogin = () => {
+  const handleQuickLogin = async () => {
     setUsername('admin');
     setPassword('admin123');
     setLoading(true);
-    setTimeout(() => {
-      login('admin123');
+    const success = await login('admin', 'admin123');
+    if (success) {
       router.push('/admin');
-    }, 300);
+    } else {
+      setLoading(false);
+    }
   };
 
   return (

@@ -188,7 +188,7 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
             <div className="relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-500 to-blue-500 blur-2xl opacity-40" />
-              <Image src={profile.headImage} alt={profile.headName} width={300} height={300} className="relative h-72 w-72 rounded-full object-cover shadow-2xl" />
+              <Image unoptimized src={profile.headImage || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80'} alt={profile.headName || 'Kepala Kelurahan'} width={300} height={300} className="relative h-72 w-72 rounded-full object-cover shadow-2xl" />
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -244,7 +244,7 @@ export default function Home() {
           {potentials.map((item, index) => (
             <motion.div key={item.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }} className="overflow-hidden rounded-[1.75rem] border border-slate-200/70 bg-white/80 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)] backdrop-blur">
               <div className="relative h-56 overflow-hidden">
-                <Image src={item.image} alt={item.title} fill className="object-cover transition duration-700 hover:scale-110" />
+                <Image unoptimized src={item.image} alt={item.title} fill className="object-cover transition duration-700 hover:scale-110" />
               </div>
               <div className="p-6">
                 <div className="inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-green-700">{item.tag}</div>
@@ -269,7 +269,7 @@ export default function Home() {
             <motion.article key={item.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.07 }} className="overflow-hidden rounded-[1.75rem] border border-slate-200/70 bg-white/80 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)] backdrop-blur flex flex-col justify-between">
               <div>
                 <div className="relative h-48">
-                  <Image src={item.image} alt={item.title} fill className="object-cover" />
+                  <Image unoptimized src={item.image} alt={item.title} fill className="object-cover" />
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-blue-600">
@@ -307,14 +307,14 @@ export default function Home() {
         <div className="columns-1 gap-5 md:columns-2 xl:columns-3">
           {(activeFilter === 'Semua' ? gallery : gallery.filter((item) => item.category === activeFilter)).map((item, index) => (
             <motion.div key={item.id || index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-5 overflow-hidden rounded-[1.5rem] border border-slate-200/70 bg-white/80 shadow-sm">
-              <Image src={item.image} alt={item.category} width={700} height={900} className="w-full object-cover" />
+              <Image unoptimized src={item.image} alt={item.category} width={700} height={900} className="w-full object-cover" />
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="mx-auto max-w-7xl px-4 py-20 md:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-20 md:px-8 lg:hidden">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="rounded-[2.5rem] bg-gradient-to-r from-green-600 to-blue-600 p-8 text-white shadow-[0_30px_100px_-30px_rgba(15,23,42,0.35)] lg:p-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
@@ -336,7 +336,7 @@ export default function Home() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Peta Lokasi kantor Kelurahan</p>
             <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">Temui kami di Kelurahan Kriwen</h2>
             <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-slate-200">
-              <Image src={profile.mapImage} alt="Peta desa" width={1000} height={600} className="h-72 w-full object-cover" />
+              <Image unoptimized src={profile.mapImage || 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80'} alt="Peta desa" width={1000} height={600} className="h-72 w-full object-cover" />
             </div>
           </div>
           <div className="rounded-[1.75rem] bg-slate-50 p-6 shadow-sm">
