@@ -50,6 +50,9 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState('Semua');
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // State untuk Pop-up Berita (menyimpan objek berita utuh)
+  const [selectedNews, setSelectedNews] = useState<any | null>(null);
+
   // Complaint Form State for citizens
   const [complaintFormOpen, setComplaintFormOpen] = useState(false);
   const [complaintForm, setComplaintForm] = useState({
@@ -272,22 +275,39 @@ export default function Home() {
         </div>
         <div className="grid gap-6 lg:grid-cols-3">
           {news.map((item, index) => (
-            <motion.article key={item.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.07 }} className="overflow-hidden rounded-[1.75rem] border border-slate-200/70 bg-white/80 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)] backdrop-blur flex flex-col justify-between">
+            <motion.article 
+              key={item.id} 
+              initial={{ opacity: 0, y: 24 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: index * 0.07 }} 
+              onClick={() => setSelectedNews(item)} 
+              className="group overflow-hidden rounded-[1.75rem] border border-slate-200/70 bg-white/80 shadow-[0_20px_50px_-20px_rgba(15,23,42,0.25)] backdrop-blur flex flex-col justify-between cursor-pointer transition-transform hover:-translate-y-1 hover:shadow-xl"
+            >
               <div>
-                <div className="relative h-48">
-                  <Image unoptimized src={item.image} alt={item.title} fill className="object-cover" />
+                <div className="relative h-48 overflow-hidden">
+                  <Image unoptimized src={item.image} alt={item.title} fill className="object-cover transition duration-500 group-hover:scale-105" />
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-blue-600">
                     <span className="rounded-full bg-blue-50 px-3 py-1">{item.category}</span>
                   </div>
-                  <h3 className="mt-4 text-xl font-bold text-slate-900">{item.title}</h3>
+                  <h3 className="mt-4 text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{item.title}</h3>
                   <div className="mt-3 flex items-center gap-3 text-sm text-slate-500">
-                    <span>{item.date}</span>
+                    <span className="flex items-center gap-1"><CalendarDays className="h-3.5 w-3.5" /> {item.date}</span>
                     <span>•</span>
-                    <span>{item.author}</span>
+                    <span className="flex items-center gap-1"><UserRound className="h-3.5 w-3.5" /> {item.author}</span>
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">{item.excerpt}</p>
+                  
+                  {/* PENAMBAHAN 'line-clamp-2' AGAR MAKSIMAL TAMPIL 2 BARIS SAJA */}
+                  <p className="mt-4 mb-4 text-sm leading-7 text-slate-600 line-clamp-2">
+                    {item.excerpt}
+                  </p>
+                  
+                  {/* Teks penunjuk klik */}
+                  <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 transition-colors group-hover:text-green-600">
+                    Baca Berita Utuh <ArrowRight className="h-4 w-4" />
+                  </div>
                 </div>
               </div>
             </motion.article>
@@ -350,16 +370,13 @@ export default function Home() {
         </motion.div>
       </section>
 
-
       {/* Kontak */}
       <section id="kontak" className="mx-auto max-w-7xl px-4 py-20 md:px-8">
         <div className="grid gap-8 rounded-[2.25rem] border border-slate-200/70 bg-white/80 p-8 shadow-[0_30px_100px_-30px_rgba(15,23,42,0.3)] backdrop-blur lg:grid-cols-[1fr_0.8fr] lg:p-12">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Peta Lokasi kantor Kelurahan</p>
             <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">Temui kami di Kelurahan Kriwen</h2>
-            <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-slate-200">
-              <Image unoptimized src={profile.mapImage || 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80'} alt="Peta desa" width={1000} height={600} className="h-72 w-full object-cover" />
-            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19873.34059795004!2d110.78324915436816!3d-7.687356053797666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3eb2f4a1545d%3A0x5027a76e356b4e0!2sKriwen%2C%20Kec.%20Sukoharjo%2C%20Kabupaten%20Sukoharjo%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1787148439935!5m2!1sid!2sid" width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="strict-origin-when-cross-origin"></iframe>
           </div>
           <div className="rounded-[1.75rem] bg-slate-50 p-6 shadow-sm">
             <h3 className="text-xl font-bold text-slate-900">Informasi Kontak</h3>
@@ -373,6 +390,57 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Modal Detail Berita (Tanpa Iframe, Teks Langsung) */}
+      {selectedNews && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md p-4">
+          <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} className="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
+            {/* Header Modal */}
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">Detail Berita</h3>
+              </div>
+              <button onClick={() => setSelectedNews(null)} className="rounded-full bg-slate-100 p-2 text-slate-500 transition hover:bg-slate-200">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            {/* Isi Konten (Bisa di-scroll) */}
+            <div className="overflow-y-auto p-6 md:p-8">
+              <div className="relative h-64 sm:h-80 w-full overflow-hidden rounded-2xl mb-6 shadow-sm">
+                <Image unoptimized src={selectedNews.image} alt={selectedNews.title} fill className="object-cover" />
+              </div>
+              <div className="mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full">
+                {selectedNews.category}
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 leading-tight">{selectedNews.title}</h2>
+              <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-slate-500 border-b border-slate-100 pb-5">
+                <span className="flex items-center gap-1.5"><CalendarDays className="h-4 w-4 text-slate-400" /> {selectedNews.date}</span>
+                <span className="hidden sm:inline">•</span>
+                <span className="flex items-center gap-1.5"><UserRound className="h-4 w-4 text-slate-400" /> Dipublikasikan oleh {selectedNews.author}</span>
+              </div>
+              
+              {/* Teks Berita Penuh */}
+              <div className="prose prose-slate max-w-none text-slate-700 leading-loose text-base">
+                <p className="font-medium text-slate-900 text-lg mb-6">{selectedNews.excerpt}</p>
+                
+                {selectedNews.content ? (
+                  <div dangerouslySetInnerHTML={{ __html: selectedNews.content }} />
+                ) : (
+                  <>
+                    <p className="mb-4">
+                      Kegiatan ini merupakan bagian dari upaya berkelanjutan Kelurahan Kriwen untuk meningkatkan kualitas hidup masyarakat. Dengan partisipasi aktif warga, berbagai program yang telah dirancang diharapkan mampu berjalan dengan optimal dan memberikan dampak positif secara langsung di lingkungan tempat tinggal kita.
+                    </p>
+                    <p className="mb-4">
+                      Selain itu, transparansi serta komunikasi terbuka antara aparat desa dan warga menjadi kunci suksesnya setiap langkah pembangunan. Pihak kelurahan sangat mengapresiasi dukungan dari seluruh lapisan masyarakat dan berharap kerja sama ini dapat terus ditingkatkan di masa-masa mendatang demi tercapainya lingkungan yang lebih maju, aman, dan sejahtera.
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
 
       {/* Complaint Form Modal for Public */}
       {complaintFormOpen && (
