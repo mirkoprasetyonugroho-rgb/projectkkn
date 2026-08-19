@@ -358,8 +358,7 @@ export default function Home() {
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Peta Lokasi kantor Kelurahan</p>
             <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">Temui kami di Kelurahan Kriwen</h2>
             <div className="mt-6 overflow-hidden rounded-[1.5rem] border border-slate-200">
-              <Image unoptimized src={profile.mapImage || 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80'} alt="Peta desa" width={1000} height={600} className="h-72 w-full object-cover" />
-            </div>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19873.34059795004!2d110.78324915436816!3d-7.687356053797666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3eb2f4a1545d%3A0x5027a76e356b4e0!2sKriwen%2C%20Kec.%20Sukoharjo%2C%20Kabupaten%20Sukoharjo%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1787148439935!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
           <div className="rounded-[1.75rem] bg-slate-50 p-6 shadow-sm">
             <h3 className="text-xl font-bold text-slate-900">Informasi Kontak</h3>
